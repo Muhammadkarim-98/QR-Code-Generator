@@ -29,11 +29,14 @@ app.post("/getQRcode", (req, res, err) => {
         res.render("emptyData", { title: "Empty Data!" });
     } else if (req.body.QRtext) {
         let textData = req.body.QRtext;
-        qrCode.toDataURL(textData, { type: "terminal" }, (err, url) => {
-            if (err) res.send(err.message);
-            res.render("qrContainer", { data: url, title: "Your QRcode!" });
-            console.log(url);
-        });
+        qrCode.toDataURL(
+            textData, { type: "terminal", quality: 0.5 },
+            (err, url) => {
+                if (err) res.send(err.message);
+                res.render("qrContainer", { data: url, title: "Your QRcode!" });
+                console.log(url);
+            }
+        );
     }
 });
 
