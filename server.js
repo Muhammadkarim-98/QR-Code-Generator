@@ -3,8 +3,6 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
-const pug = require("pug");
-// const routerFile = require("./router");
 const qrCode = require("qrcode");
 const port = process.env.PORT || 9000;
 
@@ -15,15 +13,12 @@ app.use(express.static(path.join(__dirname, "templates")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// const qr = qrCode.toString("i am a student!", function(err, url) {
-//     console.log(url);
-// });
 // Home Route
 app.get("/", (req, res) => {
     res.status(200).render("base", { title: "QR Application!" });
     console.log("hi, it working!");
 });
-
+// Post (input)
 app.post("/getQRcode", (req, res, err) => {
     if (!req.body.QRtext) {
         res.render("emptyData", { title: "Empty Data!" });
